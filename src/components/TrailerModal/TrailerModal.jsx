@@ -34,7 +34,7 @@ export default function TrailerModal({ id, onClose }) {
     try {
       const { results } = await fetchMovieVideosById(id);
       const filteredTrailers = results.filter(({ type }) => type === 'Trailer');
-      if (!filteredTrailers.length) {
+      if (filteredTrailers.length === 0) {
         setStatus('rejected');
         return;
       }
@@ -62,9 +62,7 @@ export default function TrailerModal({ id, onClose }) {
       <TrailerModalContainer>
         {status === 'pending' && <Loader />}
         {status === 'resolved' && <Player url={url} />}
-        {status === 'rejected' && (
-          <TrailerModalRejected onClose={this.props.onClose} />
-        )}
+        {status === 'rejected' && <TrailerModalRejected onClose={onClose} />}
       </TrailerModalContainer>
     </TrailerModalOverlay>,
     modalRoot
