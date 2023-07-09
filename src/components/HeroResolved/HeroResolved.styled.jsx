@@ -3,11 +3,11 @@ import styled from '@emotion/styled';
 export const HeroResolvedContainer = styled.div`
   padding-left: 135px;
   padding-top: 118px;
-  height: 100%;
+  min-height: 100%;
   width: 100%;
   background: linear-gradient(77deg, #111 18%, rgba(17, 17, 17, 0) 100%),
     url(${prop => 'https://image.tmdb.org/t/p/w1280/' + prop.backgroundImg});
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: 220px;
 `;
@@ -22,7 +22,7 @@ export const HeroTitle = styled.h2`
   margin-bottom: 16px;
 `;
 
-export const HeroStarRating = styled.div`
+export const HeroStarRating = styled.ul`
   display: flex;
   gap: 4px;
   height: 24px;

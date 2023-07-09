@@ -1,38 +1,39 @@
+import { useEffect, useState } from 'react';
+
 import HeroResolved from 'components/HeroResolved/HeroResolved';
 import Loader from 'components/Loader/Loader';
-import { Component } from 'react';
 import { fetchDayTrends } from 'services/movieApiService';
 import { HeroContainer } from './Hero.styled';
+import HeroRejected from 'components/HeroRejected/HeroRejected';
 
-class Hero extends Component {
-  state = {
-    dayTrends: [],
-    status: 'idle',
-  };
-  componentDidMount() {
-    this.getDayTrends();
-  }
-  getDayTrends = async () => {
-    this.setState({ status: 'pending' });
+export default function Hero() {
+  const [dayTrends, setDayTrends] = useState([]);
+  const [status, setStatus] = useState('idle');
+
+  useEffect(() => {
+    getDayTrends();
+  }, []);
+
+  const getDayTrends = async () => {
+    setStatus('pending');
     try {
       const { results } = await fetchDayTrends();
-      this.setState({ dayTrends: results, status: 'resolved' });
+      setStatus('resolved');
+      setDayTrends(results);
     } catch (error) {
       console.error(error.message);
-      this.setState({ status: 'rejected' });
+      setStatus('rejected');
     }
   };
-  render() {
-    const dayTrend = this.state.dayTrends[Math.floor(Math.random() * 19)];
-    return (
-      <HeroContainer>
-        {this.state.status === 'pending' && <Loader />}
-        {this.state.status === 'resolved' && (
-          <HeroResolved dayTrend={dayTrend} />
-        )}
-      </HeroContainer>
-    );
-  }
-}
 
-export default Hero;
+  const dayTrend =
+    dayTrends[Math.round(Math.random() * (dayTrends.length - 1))];
+
+  return (
+    <HeroContainer>
+      {status === 'pending' && <Loader />}
+      {status === 'resolved' && <HeroResolved dayTrend={dayTrend} />}
+      {status === 'rejected' && <HeroRejected />}
+    </HeroContainer>
+  );
+}
