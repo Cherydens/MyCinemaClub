@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/MyCinemaClub/static/css/main.2e99b678.css",
-    "main.js": "/MyCinemaClub/static/js/main.f6a5f88a.js",
+    "main.js": "/MyCinemaClub/static/js/main.b17047f6.js",
     "static/media/close-outline.svg": "/MyCinemaClub/static/media/close-outline.a9e0c33a54483769f1bc193dd8059135.svg",
     "static/media/hero-bg.jpg": "/MyCinemaClub/static/media/hero-bg.c921ce8b414d6a146c16.jpg",
     "static/media/Roboto-Medium.ttf": "/MyCinemaClub/static/media/Roboto-Medium.7c8d04cd831df3033c8a.ttf",
@@ -9,10 +9,10 @@
     "static/media/Roboto-Bold.ttf": "/MyCinemaClub/static/media/Roboto-Bold.f80816a5455d171f948d.ttf",
     "index.html": "/MyCinemaClub/index.html",
     "main.2e99b678.css.map": "/MyCinemaClub/static/css/main.2e99b678.css.map",
-    "main.f6a5f88a.js.map": "/MyCinemaClub/static/js/main.f6a5f88a.js.map"
+    "main.b17047f6.js.map": "/MyCinemaClub/static/js/main.b17047f6.js.map"
   },
   "entrypoints": [
     "static/css/main.2e99b678.css",
-    "static/js/main.f6a5f88a.js"
+    "static/js/main.b17047f6.js"
   ]
 }
