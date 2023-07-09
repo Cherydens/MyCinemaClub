@@ -27,7 +27,7 @@ export default function TrailerModal({ id, onClose }) {
     return () => {
       window.removeEventListener('keydown', onKeyDown);
     };
-  }, []);
+  }, [id, onClose]);
 
   const getRandomTrailer = async id => {
     setStatus('pending');
