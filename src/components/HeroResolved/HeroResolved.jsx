@@ -16,15 +16,15 @@ import {
 export default function HeroResolved({ dayTrend }) {
   const { id, title, vote_average, overview, backdrop_path } = dayTrend;
   const [showTrailerModal, setShowTrailerModal] = useState(false);
-  const [showDetailsModal, setShowDetailsModal] = useState(false);
+  // const [showDetailsModal, setShowDetailsModal] = useState(false);
 
   const toggleTrailerModal = () => {
     setShowTrailerModal(prevState => !prevState);
   };
 
-  const toggleDetailsModal = () => {
-    setShowDetailsModal(prevState => !prevState);
-  };
+  // const toggleDetailsModal = () => {
+  //   setShowDetailsModal(prevState => !prevState);
+  // };
 
   return (
     <HeroResolvedContainer backgroundImg={backdrop_path}>
@@ -36,9 +36,7 @@ export default function HeroResolved({ dayTrend }) {
           <PrimaryHeroBtn type="button" onClick={toggleTrailerModal}>
             Watch trailer
           </PrimaryHeroBtn>
-          <SecondaryHeroBtn type="button" onClick={toggleDetailsModal}>
-            More details
-          </SecondaryHeroBtn>
+          <SecondaryHeroBtn type="button">More details</SecondaryHeroBtn>
         </HeroBtnContainer>
       </HeroInfoContainer>
       {showTrailerModal && (
