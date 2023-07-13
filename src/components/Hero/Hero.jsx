@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 
-import HeroResolved from 'components/HeroResolved/HeroResolved';
 import Loader from 'components/Loader/Loader';
 import { fetchDayTrends } from 'services/movieApiService';
 import { HeroContainer } from './Hero.styled';
 import HeroRejected from 'components/HeroRejected/HeroRejected';
+import Slider from 'components/Slider/Slider';
+import HeroResolved from 'components/HeroResolved/HeroResolved';
 
 export default function Hero() {
   const [dayTrends, setDayTrends] = useState([]);
@@ -18,21 +19,18 @@ export default function Hero() {
     setStatus('pending');
     try {
       const { results } = await fetchDayTrends();
-      setStatus('resolved');
       setDayTrends(results);
+      setStatus('resolved');
     } catch (error) {
       console.error(error.message);
       setStatus('rejected');
     }
   };
 
-  const dayTrend =
-    dayTrends[Math.round(Math.random() * (dayTrends.length - 1))];
-
   return (
     <HeroContainer>
       {status === 'pending' && <Loader />}
-      {status === 'resolved' && <HeroResolved dayTrend={dayTrend} />}
+      {status === 'resolved' && <Slider dayTrends={dayTrends} />}
       {status === 'rejected' && <HeroRejected />}
     </HeroContainer>
   );

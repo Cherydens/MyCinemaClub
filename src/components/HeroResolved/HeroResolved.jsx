@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useLockBodyScroll, useToggle } from 'react-use';
 import TrailerModal from 'components/TrailerModal/TrailerModal';
 import { renderStarRating } from 'services/renderStarRating';
 
@@ -12,19 +12,15 @@ import {
   PrimaryHeroBtn,
   SecondaryHeroBtn,
 } from './HeroResolved.styled';
+import DetailsModal from 'components/DetailsModal/DetailsModal';
 
-export default function HeroResolved({ dayTrend }) {
-  const { id, title, vote_average, overview, backdrop_path } = dayTrend;
-  const [showTrailerModal, setShowTrailerModal] = useState(false);
-  // const [showDetailsModal, setShowDetailsModal] = useState(false);
+export default function HeroResolved({
+  dayTrend: { id, title, vote_average, overview, backdrop_path },
+}) {
+  const [showTrailerModal, setShowTrailerModal] = useToggle(false);
+  const [showDetailsModal, setShowDetailsModal] = useToggle(false);
 
-  const toggleTrailerModal = () => {
-    setShowTrailerModal(prevState => !prevState);
-  };
-
-  // const toggleDetailsModal = () => {
-  //   setShowDetailsModal(prevState => !prevState);
-  // };
+  useLockBodyScroll(showTrailerModal || showDetailsModal);
 
   return (
     <HeroResolvedContainer backgroundImg={backdrop_path}>
@@ -33,14 +29,19 @@ export default function HeroResolved({ dayTrend }) {
         <HeroStarRating>{renderStarRating(vote_average)}</HeroStarRating>
         <HeroFilmOverview>{overview}</HeroFilmOverview>
         <HeroBtnContainer>
-          <PrimaryHeroBtn type="button" onClick={toggleTrailerModal}>
+          <PrimaryHeroBtn type="button" onClick={setShowTrailerModal}>
             Watch trailer
           </PrimaryHeroBtn>
-          <SecondaryHeroBtn type="button">More details</SecondaryHeroBtn>
+          <SecondaryHeroBtn type="button" onClick={setShowDetailsModal}>
+            More details
+          </SecondaryHeroBtn>
         </HeroBtnContainer>
       </HeroInfoContainer>
       {showTrailerModal && (
-        <TrailerModal onClose={toggleTrailerModal} id={id} />
+        <TrailerModal onClose={setShowTrailerModal} id={id} />
+      )}
+      {showDetailsModal && (
+        <DetailsModal onClose={setShowDetailsModal} id={id} />
       )}
     </HeroResolvedContainer>
   );

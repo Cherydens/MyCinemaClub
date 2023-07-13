@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const TrailerModalOverlay = styled.div`
+export const DetailsModalOverlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -13,12 +13,15 @@ export const TrailerModalOverlay = styled.div`
   z-index: 1200;
 `;
 
-export const TrailerModalContainer = styled.div`
+export const DetailsModalContainer = styled.div`
   position: relative;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
   width: 100%;
   height: 100%;
-  max-width: 700px;
-  max-height: 400px;
+  max-width: 846px;
+  max-height: 598px;
   border-radius: 20px;
   background: #111;
   box-shadow: 1px 1px 14px 4px rgba(255, 107, 8, 0.42);

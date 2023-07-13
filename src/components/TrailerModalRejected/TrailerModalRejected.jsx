@@ -1,21 +1,25 @@
-import closeIcon from '../../images/close-outline.svg';
+import { AiOutlineClose } from 'react-icons/ai';
+
+import {
+  ModalBtnClose,
+  TrailerModalRejectedContainer,
+  TrailerModalRejectedText,
+} from './TrailerModalRejected.styled';
 
 const TrailerModalRejected = ({ onClose }) => {
   return (
-    <div>
-      <button type="button" onClick={onClose}>
-        <svg width="16" height="16">
-          <use href={closeIcon}></use>
-        </svg>
-      </button>
-      <p>
+    <TrailerModalRejectedContainer>
+      <ModalBtnClose type="button" onClick={onClose}>
+        <AiOutlineClose />
+      </ModalBtnClose>
+      <TrailerModalRejectedText>
         OOPS...
         <br />
         We are very sorry!
         <br />
         But we couldn’t find the trailer.
-      </p>
-    </div>
+      </TrailerModalRejectedText>
+    </TrailerModalRejectedContainer>
   );
 };
 

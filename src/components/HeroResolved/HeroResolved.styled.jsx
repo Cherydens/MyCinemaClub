@@ -14,23 +14,33 @@ export const HeroResolvedContainer = styled.div`
 
 export const HeroInfoContainer = styled.div`
   width: 670px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 `;
 
 export const HeroTitle = styled.h2`
   font-size: 64px;
   font-weight: 700;
   margin-bottom: 16px;
+  text-align: left;
 `;
 
-export const HeroStarRating = styled.ul`
+export const HeroStarRating = styled.div`
   display: flex;
+  justify-content: start;
+  text-align: start;
+  align-items: center;
   gap: 4px;
-  height: 24px;
+  max-height: 24px;
   margin-bottom: 28px;
+  img {
+    max-width: 24px;
+  }
 `;
 export const HeroFilmOverview = styled.p`
   width: 370px;
-
+  text-align: start;
   color: #f8f8f8;
   display: -webkit-box;
   -webkit-line-clamp: 4;
@@ -55,13 +65,14 @@ export const PrimaryHeroBtn = styled.button`
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
+  border: none;
 `;
 
 export const SecondaryHeroBtn = styled.button`
   padding: 12px 24px;
   border-radius: 74px;
   border: 1px solid #fff;
-  background: transparent;
+  background: none;
   color: #fff;
   text-align: center;
   font-size: 16px;

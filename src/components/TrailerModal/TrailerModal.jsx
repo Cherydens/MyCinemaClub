@@ -19,39 +19,42 @@ export default function TrailerModal({ id, onClose }) {
   const [status, setStatus] = useState('idle');
 
   useEffect(() => {
-    const onKeyDown = e => {
+    async function getRandomTrailer(id) {
+      setStatus('pending');
+      try {
+        const { results } = await fetchMovieVideosById(id);
+        console.log(results);
+        const filteredTrailers = results.filter(
+          ({ type }) => type === 'Trailer'
+        );
+        if (filteredTrailers.length === 0) {
+          setStatus('rejected');
+          return;
+        }
+        const url =
+          'https://www.youtube-nocookie.com/embed/' +
+          filteredTrailers[
+            Math.round(Math.random() * (filteredTrailers.length - 1))
+          ].key;
+        setUrl(url);
+        setStatus('resolved');
+      } catch (error) {
+        console.error(error.message);
+        setStatus('rejected');
+      }
+    }
+
+    function onKeyDown(e) {
       e.code === 'Escape' && onClose();
-    };
-    window.addEventListener('keydown', onKeyDown);
+    }
+
     getRandomTrailer(id);
+    window.addEventListener('keydown', onKeyDown);
+
     return () => {
       window.removeEventListener('keydown', onKeyDown);
     };
   }, [id, onClose]);
-
-  const getRandomTrailer = async id => {
-    setStatus('pending');
-    try {
-      const { results } = await fetchMovieVideosById(id);
-      const filteredTrailers = results.filter(({ type }) => type === 'Trailer');
-      if (filteredTrailers.length === 0) {
-        setStatus('rejected');
-        return;
-      }
-      const url =
-        'https://www.youtube-nocookie.com/embed/' +
-        filteredTrailers[
-          Math.round(Math.random() * (filteredTrailers.length - 1))
-        ].key;
-
-      setUrl(url);
-      console.log(url);
-      setStatus('resolved');
-    } catch (error) {
-      console.error(error.message);
-      setStatus('rejected');
-    }
-  };
 
   const onBackdropClick = e => {
     e.currentTarget === e.target && onClose();
